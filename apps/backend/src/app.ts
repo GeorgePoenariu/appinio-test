@@ -1,4 +1,5 @@
 import * as bodyParser from 'body-parser';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application } from 'express';
 import session from 'express-session';
@@ -12,7 +13,10 @@ const app: Application = express();
 
 dotenv.config();
 
+app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.json());
+
 connectDB();
 
 app.use(
