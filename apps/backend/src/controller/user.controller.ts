@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
-import { NextFunction, Request, Response } from "express";
+import bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 
-import { IUser, User } from "../model/user.model";
+import { IUser, User } from '../model/user.model';
 
 /**
  * @registers the user
@@ -12,9 +12,7 @@ export const registerUser = async (req: Request, res: Response) => {
     // Check if user with the email already exists
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "User with this email already exists." });
+      return res.status(400).json({ message: 'User with this email already exists.' });
     }
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,10 +24,10 @@ export const registerUser = async (req: Request, res: Response) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: "User registered successfully." });
+    res.status(201).json({ message: 'User registered successfully.' });
   } catch (err) {
-    console.error("Error registering user:", err);
-    res.status(500).json({ message: "Internal server error." });
+    console.error('Error registering user:', err);
+    res.status(500).json({ message: 'Internal server error.' });
   }
 };
 
@@ -38,7 +36,7 @@ export const registerUser = async (req: Request, res: Response) => {
  */
 export const getUser = async (req: Request, res: Response) => {
   if (!req.user) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   // If the user is authenticated and exists, send selected user data in the response
@@ -49,22 +47,17 @@ export const getUser = async (req: Request, res: Response) => {
 /**
  * @logs in the user
  */
-export const loginUser = async (req: Request, res: Response) =>
-  res.send("Login successful");
+export const loginUser = async (req: Request, res: Response) => res.send('Login successful');
 
 /**
  * @logs out the user
  */
-export const logoutUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    res.redirect('/');
   });
 };
 
@@ -73,4 +66,4 @@ export const logoutUser = async (
  */
 // TODO: possibly remove
 export const checkIfUserIsAuthenticated = async (req: Request, res: Response) =>
-  res.send("Protected route");
+  res.send('Protected route');

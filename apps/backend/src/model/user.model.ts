@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export interface IUser extends mongoose.Document {
   fullName: string;
@@ -12,4 +12,4 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
-export const User = mongoose.model<IUser>("User", userSchema);
+export const User = mongoose.model<IUser>('User', userSchema);

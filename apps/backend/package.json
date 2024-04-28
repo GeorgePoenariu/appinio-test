@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "lint": "eslint \"**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\""
   },
   "keywords": [],
   "author": "",

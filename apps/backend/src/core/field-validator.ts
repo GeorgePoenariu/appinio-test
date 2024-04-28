@@ -1,31 +1,31 @@
-import { body } from "express-validator";
+import { body } from 'express-validator';
 
-export const validateEmail = body("email")
+export const validateEmail = body('email')
   .notEmpty()
-  .withMessage("Email cannot be empty")
+  .withMessage('Email cannot be empty')
   .isEmail()
-  .withMessage("Invalid email format")
+  .withMessage('Invalid email format')
   .normalizeEmail();
 
-export const validatePassword = body("password")
+export const validatePassword = body('password')
   .notEmpty()
-  .withMessage("Password is required")
+  .withMessage('Password is required')
   .isLength({ min: 8 })
-  .withMessage("Password must be at least 8 characters long")
+  .withMessage('Password must be at least 8 characters long')
   .escape();
 
-export const validateFullName = body("fullName")
+export const validateFullName = body('fullName')
   .notEmpty()
-  .withMessage("FullName is required")
+  .withMessage('FullName is required')
   .isLength({ min: 4 })
-  .withMessage("FullName must be at least 4 characters long")
+  .withMessage('FullName must be at least 4 characters long')
   .matches(/^([a-zA-Z]+ ?)+$/)
-  .withMessage("FullName must contain one or more names separated by spaces")
+  .withMessage('FullName must contain one or more names separated by spaces')
   .trim()
   .escape();
 
-export const validateArticle = body("article")
+export const validateArticle = body('article')
   .trim()
   .isLength({ min: 50 })
-  .withMessage("Article must not be empty and contain at least 50 characters")
+  .withMessage('Article must not be empty and contain at least 50 characters')
   .escape();

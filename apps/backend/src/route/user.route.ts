@@ -1,37 +1,32 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import passport from "passport";
+import passport from 'passport';
 import {
   checkIfUserIsAuthenticated,
   getUser,
   loginUser,
   logoutUser,
   registerUser,
-} from "../controller/user.controller";
-import { isAuthenticated } from "../middleware/is-authenticated.middleware";
+} from '../controller/user.controller';
+import { isAuthenticated } from '../middleware/is-authenticated.middleware';
 import {
   handleValidationErrors,
   validateLoginPayload,
   validateRegisterPayload,
-} from "../middleware/validator.middleware";
+} from '../middleware/validator.middleware';
 
 const router = Router();
 
-router.get("/", isAuthenticated, getUser);
+router.get('/', isAuthenticated, getUser);
+router.post('/register', validateRegisterPayload, handleValidationErrors, registerUser);
 router.post(
-  "/register",
-  validateRegisterPayload,
-  handleValidationErrors,
-  registerUser
-);
-router.post(
-  "/login",
+  '/login',
   validateLoginPayload,
   handleValidationErrors,
-  passport.authenticate("local"),
-  loginUser
+  passport.authenticate('local'),
+  loginUser,
 );
-router.post("/logout", logoutUser);
-router.post("/protected", isAuthenticated, checkIfUserIsAuthenticated);
+router.post('/logout', logoutUser);
+router.post('/protected', isAuthenticated, checkIfUserIsAuthenticated);
 
 export const userRouter: Router = router;
