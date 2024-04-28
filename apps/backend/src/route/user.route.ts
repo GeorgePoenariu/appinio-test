@@ -17,7 +17,7 @@ import {
 
 const router = Router();
 
-router.get("/", getUser);
+router.get("/", isAuthenticated, getUser);
 router.post(
   "/register",
   validateRegisterPayload,

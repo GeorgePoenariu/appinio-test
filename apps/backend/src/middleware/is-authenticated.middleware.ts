@@ -8,5 +8,5 @@ export const isAuthenticated = (
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/login");
+  return res.status(401).json({ error: "Unauthorized" });
 };
