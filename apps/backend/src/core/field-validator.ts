@@ -23,3 +23,9 @@ export const validateFullName = body("fullName")
   .withMessage("FullName must contain one or more names separated by spaces")
   .trim()
   .escape();
+
+export const validateArticle = body("article")
+  .trim()
+  .isLength({ min: 50 })
+  .withMessage("Article must not be empty and contain at least 50 characters")
+  .escape();
