@@ -20,6 +20,25 @@ const Home = () => {
   const [summarizations, setSummarizations] = useState<ISummarization[]>([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/user/check-auth');
+        if (response.data.authenticated) {
+          // User is authenticated, fetch summarizations
+          await fetchSummarizations();
+        } else {
+          // User is not authenticated, redirect to login page
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error checking authentication:', error);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
+
   const handleSummarization = async () => {
     try {
       await api.post('/summarization', { article });
@@ -47,11 +66,6 @@ const Home = () => {
       console.error('Error logging out:', error);
     }
   };
-
-  // Fetch summarizations on component mount
-  useEffect(() => {
-    fetchSummarizations();
-  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

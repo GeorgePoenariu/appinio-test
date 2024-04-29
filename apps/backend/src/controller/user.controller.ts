@@ -55,3 +55,9 @@ export const logoutUser = async (req: Request, res: Response, next: NextFunction
     }
     res.send('Logout successful');
   });
+
+/**
+ * @checks if the user is authenticated
+ */
+export const checkAuth = async (req: Request, res: Response, next: NextFunction) =>
+  res.status(200).json({ authenticated: req.isAuthenticated() });
