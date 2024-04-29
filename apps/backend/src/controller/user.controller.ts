@@ -9,14 +9,11 @@ import { IUser, User } from '../model/user.model';
 export const registerUser = async (req: Request, res: Response) => {
   const { fullName, email, password } = req.body;
   try {
-    // Check if user with the email already exists
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
       return res.status(400).json({ message: 'User with this email already exists.' });
     }
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
-    // Create a new user
     const newUser = new User({
       fullName: fullName,
       email: email,
@@ -39,7 +36,6 @@ export const getUser = async (req: Request, res: Response) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  // If the user is authenticated and exists, send selected user data in the response
   const { fullName, email, id } = req.user as IUser;
   res.json({ id, fullName, email });
 };
@@ -52,18 +48,10 @@ export const loginUser = async (req: Request, res: Response) => res.send('Login 
 /**
  * @logs out the user
  */
-export const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
+export const logoutUser = async (req: Request, res: Response, next: NextFunction) =>
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+    res.send('Logout successful');
   });
-};
-
-/**
- * @checks if the user is authenticated
- */
-// TODO: possibly remove
-export const checkIfUserIsAuthenticated = async (req: Request, res: Response) =>
-  res.send('Protected route');

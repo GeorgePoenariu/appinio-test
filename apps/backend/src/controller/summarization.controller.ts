@@ -42,7 +42,8 @@ export const getSummarizationList = async (req: Request, res: Response) => {
     const { id: userId } = req.user as IUser;
     const summarizations = await Summarization.find({
       user: userId,
-    });
+    }).sort({ createdAt: -1 });
+
     res.json(summarizations);
   } catch (error) {
     console.error('Error retrieving summarizations:', error);

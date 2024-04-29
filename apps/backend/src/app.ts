@@ -13,7 +13,14 @@ const app: Application = express();
 
 dotenv.config();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONT_END_URL,
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  }),
+);
 app.options('*', cors());
 app.use(bodyParser.json());
 
@@ -21,9 +28,16 @@ connectDB();
 
 app.use(
   session({
-    secret: 'secret',
+    secret: process.env.PASSPORT_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: true,
+      secure: false, // Set to true if using HTTPS
+      sameSite: 'strict',
+      path: '/',
+    },
   }),
 );
 
