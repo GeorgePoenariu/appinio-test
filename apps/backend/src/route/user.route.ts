@@ -1,19 +1,13 @@
 import { Router } from 'express';
 
 import passport from 'passport';
-import {
-  checkAuth,
-  getUser,
-  loginUser,
-  logoutUser,
-  registerUser,
-} from '../controller/user.controller';
-import { isAuthenticated } from '../middleware/is-authenticated.middleware';
+import { checkAuth, getUser, loginUser, logoutUser, registerUser } from '../controller';
 import {
   handleValidationErrors,
+  isAuthenticated,
   validateLoginPayload,
   validateRegisterPayload,
-} from '../middleware/validator.middleware';
+} from '../middleware';
 
 const router = Router();
 

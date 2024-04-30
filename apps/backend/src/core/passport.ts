@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import { PassportStatic } from 'passport';
-
 import { Strategy as LocalStrategy } from 'passport-local';
-import { IUser, User } from '../model/user.model';
+
+import { IUser, User } from '../model';
 
 export const configurePassport = (passport: PassportStatic) => {
   passport.use(

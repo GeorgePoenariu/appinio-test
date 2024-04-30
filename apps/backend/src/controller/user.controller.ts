@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 
-import { IUser, User } from '../model/user.model';
+import { IUser, User } from '../model';
 
 /**
  * @registers the user

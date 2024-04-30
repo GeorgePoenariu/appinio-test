@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { validateEmail, validateFullName, validatePassword } from '../core/field-validator';
+
+import { validateEmail, validateFullName, validatePassword } from '../core';
 
 export const handleValidationErrors = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { generateOpenAiOutput } from '../core/openai';
+import { generateOpenAiOutput } from '../core';
 import { IUser, Summarization } from '../model';
 
 /**

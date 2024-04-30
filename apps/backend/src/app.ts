@@ -5,8 +5,7 @@ import express, { Application } from 'express';
 import session from 'express-session';
 import passport from 'passport';
 
-import { connectDB } from './core/db';
-import { configurePassport } from './core/passport';
+import { configurePassport, connectDB } from './core';
 import { appRouter } from './route';
 
 const app: Application = express();
