@@ -14,11 +14,13 @@ import { ExpandMore } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 import { api } from '../services';
-import { ISummarization } from '../util/interface';
+import { IApiError, ISummarization } from '../util/interface';
+import { handleApiError } from '../util';
 
 const Home = () => {
   const [article, setArticle] = useState('');
   const [summarizations, setSummarizations] = useState<ISummarization[]>([]);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,8 +32,8 @@ const Home = () => {
         } else {
           navigate('/login');
         }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
+      } catch (apiError) {
+        console.error('Error checking authentication:', apiError);
       }
     };
 
@@ -43,8 +45,10 @@ const Home = () => {
       await api.post('/summarization', { article });
       setArticle('');
       fetchSummarizations();
-    } catch (error) {
-      console.error('Error submitting summarization:', error);
+    } catch (apiError) {
+      const error = handleApiError(apiError as IApiError);
+      setError(error);
+      console.error('Error submitting summarization:', apiError);
     }
   };
 
@@ -52,8 +56,8 @@ const Home = () => {
     try {
       const response = await api.get('/summarization');
       setSummarizations(response.data);
-    } catch (error) {
-      console.error('Error fetching summarizations:', error);
+    } catch (apiError) {
+      console.error('Error fetching summarizations:', apiError);
     }
   };
 
@@ -61,8 +65,8 @@ const Home = () => {
     try {
       await api.post('/user/logout');
       navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
+    } catch (apiError) {
+      console.error('Error logging out:', apiError);
     }
   };
 
@@ -90,6 +94,14 @@ const Home = () => {
           onChange={(e) => setArticle(e.target.value)}
           sx={{ mb: 2 }}
         />
+
+        {/* Display API error */}
+        {error && (
+          <Typography variant="body2" color="error" align="left" sx={{ mt: 2, mb: 2 }}>
+            {error}
+          </Typography>
+        )}
+
         {/* Button to submit summarization */}
         <Button variant="contained" onClick={handleSummarization} sx={{ mb: 2 }}>
           Submit Summarization

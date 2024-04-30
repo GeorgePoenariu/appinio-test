@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { api } from '../services';
 import { handleApiError } from '../util';
+import { IApiError } from '../util/interface';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,8 +26,8 @@ const Login = () => {
     try {
       await api.post('/user/login', { email, password });
       navigate('/');
-    } catch (axiosError) {
-      const error = handleApiError(axiosError);
+    } catch (apiError) {
+      const error = handleApiError(apiError as IApiError);
       setError(error);
       console.error('Login failed:', error);
     }

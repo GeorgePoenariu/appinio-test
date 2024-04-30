@@ -1,11 +1,8 @@
-import { ValidationError } from 'express-validator';
+import { IApiError } from './interface';
 
-export const handleApiError = (apiError: unknown) => {
-  const error = (
-    apiError as {
-      response: { data: { errors: ValidationError[] } | { message: string } };
-    }
-  ).response.data;
+export const handleApiError = (apiError: IApiError) => {
+  const error = apiError.response.data;
+
   if (typeof error === 'string') {
     return error;
   }

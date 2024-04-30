@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { api } from '../services';
 import { handleApiError } from '../util';
+import { IApiError } from '../util/interface';
 
 const Register = () => {
   const [fullName, setName] = useState('');
@@ -26,8 +27,8 @@ const Register = () => {
     try {
       await api.post('/user/register', { fullName, email, password });
       navigate('/login');
-    } catch (axiosError) {
-      const error = handleApiError(axiosError);
+    } catch (apiError) {
+      const error = handleApiError(apiError as IApiError);
       setError(error);
       console.error('Registration failed:', error);
     }
@@ -88,6 +89,8 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
+
+            {/* Display API error */}
             {error && (
               <Typography variant="body2" color="error" align="center" sx={{ mt: 2 }}>
                 {error}
