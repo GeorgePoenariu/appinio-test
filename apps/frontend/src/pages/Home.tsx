@@ -11,8 +11,9 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
-import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+
+import { api } from '../services';
 import { ISummarization } from '../util/interface';
 
 const Home = () => {
@@ -25,10 +26,8 @@ const Home = () => {
       try {
         const response = await api.get('/user/check-auth');
         if (response.data.authenticated) {
-          // User is authenticated, fetch summarizations
           await fetchSummarizations();
         } else {
-          // User is not authenticated, redirect to login page
           navigate('/login');
         }
       } catch (error) {

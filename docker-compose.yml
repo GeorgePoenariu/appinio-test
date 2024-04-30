@@ -21,18 +21,18 @@ services:
 
   mongodb:
     image: mongo
-    container_name: mongodb
+    container_name: db
     ports:
       - "27017:27017"
     volumes:
-      - ./data:/data/db
+      - mongo_data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     restart: unless-stopped
 
 volumes:
-  data:
+  mongo_data:
 
 networks:
   default:

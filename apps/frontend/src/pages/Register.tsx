@@ -12,8 +12,8 @@ import { LockOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { api } from '../services/api';
-import { handleApiError } from '../util/handle-api-error';
+import { api } from '../services';
+import { handleApiError } from '../util';
 
 const Register = () => {
   const [fullName, setName] = useState('');
