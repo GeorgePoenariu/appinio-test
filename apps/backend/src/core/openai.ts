@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export const generateOpenAiOutput = async (prompt: string) => {
   const openAiResponse = await axios.post(
-    'https://api.openai.com/v1/completions',
+    process.env.OPENAI_URL,
     {
-      model: 'gpt-3.5-turbo-instruct',
+      model: process.env.OPENAI_MODEL,
       prompt,
       max_tokens: 200,
       stop: ['###'],

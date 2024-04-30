@@ -22,6 +22,8 @@ MONGO_HOST=db:27017
 MONGO_DATABASE=appinio
 
 # OpenAI
+OPENAI_URL=https://api.openai.com/v1/completions
+OPENAI_MODEL=gpt-3.5-turbo-instruct
 OPENAI_API_KEY=<API KEY>
 ```
 

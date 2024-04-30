@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "description": "Frontend service for the appinio-test",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

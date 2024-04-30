@@ -30,7 +30,7 @@ export const generateSummarization = async (req: Request, res: Response) => {
     res.json({ summary, insights });
   } catch (error) {
     console.error('Error summarizing text:', error);
-    res.status(500).json({ error: 'Failed to summarize text' });
+    res.status(500).json({ message: 'Failed to summarize text' });
   }
 };
 
@@ -47,6 +47,6 @@ export const getSummarizationList = async (req: Request, res: Response) => {
     res.json(summarizations);
   } catch (error) {
     console.error('Error retrieving summarizations:', error);
-    res.status(500).json({ error: 'Failed to retrieve summarizations' });
+    res.status(500).json({ message: 'Failed to retrieve summarizations' });
   }
 };
