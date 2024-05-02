@@ -33,6 +33,7 @@ const Home = () => {
           navigate('/login');
         }
       } catch (apiError) {
+        navigate('/login');
         console.error('Error checking authentication:', apiError);
       }
     };

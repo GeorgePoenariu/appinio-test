@@ -21,6 +21,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "../frontend_old/App.test.tsx", "../frontend_old/reportWebVitals.ts"  ]
+    "src",
+  ]
 }
