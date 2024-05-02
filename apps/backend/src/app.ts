@@ -34,7 +34,7 @@ app.use(
       maxAge: 60 * 60 * 1000,
       httpOnly: true,
       secure: false, // Set to true if using HTTPS
-      sameSite: false,
+      sameSite: 'strict',
       path: '/',
     },
   }),
