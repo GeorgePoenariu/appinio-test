@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { healthCheck } from './health.controller';
 
 const mockRequest = {} as Request;

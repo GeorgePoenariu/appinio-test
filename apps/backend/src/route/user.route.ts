@@ -1,6 +1,6 @@
 import { Router } from 'express';
-
 import passport from 'passport';
+
 import { checkAuth, getUser, loginUser, logoutUser, registerUser } from '../controller';
 import {
   handleValidationErrors,
